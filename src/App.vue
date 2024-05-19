@@ -182,11 +182,15 @@ onMounted(() => {
     // Assign triangle a material
     rect.material = data.materials.standard;
 
+    var startTime = Date.now()
+
     // Animation function - called before each frame gets rendered
     data.scene.onBeforeRenderObservable.add(() => {
         if (data.filter !== rect.material.name) {
             rect.material = data.materials[data.filter];
         }
+        var elapsedTime = (Date.now() - startTime) / 1000;
+        data.materials.ripple.setFloat('time', elapsedTime);
 
         if (data.textures[data.selected_texture] !== null) {
             data.materials[data.filter].setTexture('image', data.textures[data.selected_texture]);
