@@ -12,5 +12,9 @@ out vec4 FragColor;
 
 void main() {
     // Color
-    FragColor = texture(image, model_uv);
+    vec4 color = texture(image, model_uv);
+
+    vec3 invertcolor = 1.0 - color.rgb;
+
+    FragColor = vec4(invertcolor, 1.0);
 }
